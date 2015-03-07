@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>Practica ajax datatables - Miguel Berges</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="tabla" class="row">
+            <div class="col-md-12">
+                <table id="miTabla" class="table stripe">
+                <button id="newdoctor" type="button" class="btn btn-success navbar-btn">Nuevo doctor</button>
+                <a href="https://github.com/mberges92/practica-ajax-datatables" target="blank"><button id="github" type="button" class="btn btn-warning btn-outline">IR A GITHUB</button></a>
+                    <thead>
+                        <th>Nombre doctor</th>
+                        <th>Numero de colegiado</th>
+                        <th>Nombre Clinica</th>
+                        <th>Id clinica</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <th>Nombre doctor</th>
+                        <th>Numero de colegiado</th>
+                        <th>Nombre Clinica</th>
+                        <th>Id clinica</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
+                    </tfoot>
+                </table>
+
+            </div>
+
+
+        </div>
+
+        <div id="formulario" class="row">
+            <div class="col-md-4 col-md-offset-3">
+
+                <form class="form-horizontal" id="formEditar" action="" method="post" >
+                    <div>
+                    <h2>Editar doctor</h2>
+                        <div class="form-group">
+                            <label for="idDoctor" class="col-sm-2 control-label">ID Doctor:</label>
+                            <div class="col-sm-10">
+                                <input disabled="true" type="text" class="form-control" id="idDoctor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre" class="col-sm-2 control-label">Nombre:*</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nombre"  name="nombre" placeholder="Nombre del doctor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="numcolegiado" class="col-sm-2 control-label">Nº Colegiado:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="numcolegiado" name="numcolegiado" placeholder="Número de colegiado">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="clinicas" class="col-sm-2 control-label">Nombre clinicas*:</label>
+                            <div class="col-sm-10">
+                                <select  multiple id="clinicas" name="clinicas"  >
+                                  
+                                </select>
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button id="enviar" type="submit" class="btn btn-success navbar-btn">Enviar</button>
+                                <a class="btn btn-warning btn-outline" href="index.html" role="button">Cancelar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+<div class="modal fade" id="basicModal" name="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            
+            <h4 class="modal-title" id="myModalLabel">Borrar doctor</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Haga click en SI para borrar el doctor</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" type="submit" id="confBorrar" name="confBorrar" data-dismiss="modal" class="btn btn-primary aceptarBorrado">Si</button>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+        <div id="formularioCrear" class="row">
+            <div class="col-md-4 col-md-offset-3">
+                <!--/*el formulario es aproximadamente un copy-paste de http://getbootstrap.com/css/#forms -->
+                <form class="form-horizontal" id="formCrear" name="formCrear" method="post" action="#"  >
+                    <div>
+                    <h2>Añadir nuevo doctor</h2>
+                        
+                        <div class="form-group">
+                            <label for="nombreNuevo" class="col-sm-2 control-label">Nombre:*</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nombreNuevo" name="nombreNuevo"  placeholder="Nombre del doctor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="numcolegiadoNuevo" class="col-sm-2 control-label">Nº Colegiado</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="numcolegiadoNuevo" name="numcolegiadoNuevo" placeholder="Número de colegiado">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="clinicas2" class="col-sm-2 control-label">Nombre clinicas*:</label>
+                            <div class="col-sm-10">
+                                <select  multiple id="clinicas2" name="clinicas2" >
+                                  
+                                </select>
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button id="enviarDoc" type="submit" class="btn btn-success navbar-btn">Enviar</button>
+                                
+                                <a class="btn btn-warning btn-outline" href="index.html" role="button">Cancelar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+  
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap.growl/bootstrap-growl.js"></script>
+    <script src="bower_components/jquery-validate/dist/jquery.validate.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/jquery.dataTables.js"></script>
+    <script src="scripts/dataTables.bootstrap.js"></script>
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/messages_es.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+
+
+</body>
+
+</html>

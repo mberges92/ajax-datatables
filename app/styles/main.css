@@ -1,0 +1,8 @@
+td .btn-primary {margin-right: 3px;}
+body {margin-top:50px;}
+#formulario{display:none;}
+#edicionok{display: none}
+#edicionerr{display: none}
+#imgDiente{height: 20px;width: 20px;}
+#formularioCrear{display: none}
+#github{margin-left: 20px;}
